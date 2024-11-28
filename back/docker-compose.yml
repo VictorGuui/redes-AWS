@@ -2,25 +2,13 @@ version: '3.8'
 
 services:
   main-db:
-    image: mysql-redes
+    image: mysql:latest
     restart: always
-    container_name: backend-redes
+    container_name: main-db
     environment:
       MYSQL_DATABASE: 'crud'
       MYSQL_ROOT_PASSWORD: '12345678'
     ports:
       - '3307:3306'
     volumes: 
-      - ./data/db:/var/lib/mysql  
-
-  backend:
-    build:
-      context: ./  # Diretório do backend com o Dockerfile
-    restart: always
-    container_name: backend-redes-app
-    ports:
-      - '8800:8800'
-    depends_on:
-      - main-db  # Define que o backend depende do MySQL
-    environment:
-      DB_HOST: main-db
+      - ./data/db:/var/lib/mysql
