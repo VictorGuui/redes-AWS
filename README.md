@@ -1,7 +1,7 @@
 # Criação de Infraestrutura de Rede
 
   ### Topologia da Rede
-![image](https://github.com/user-attachments/assets/b79385d6-1cb4-466a-aff9-592ba21fc14c)
+![image](https://github.com/user-attachments/assets/330e6fd8-26c1-4fde-ae76-c8d3a6dc045f)
 
 
   ### Pré-requisitos
