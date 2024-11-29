@@ -8,7 +8,8 @@
 * Duas instâncias EC2 onde o frontend está hospedado.
 * Uma instância EC2 para o Load Balancer.
 * Uma instância EC2 para o Proxy Reverso e VPN.
-* Uma instância EC2 para o Backend e Banco de Dados.
+* Uma instância EC2 para o Backend, Banco de Dados e Docker<br>
+  - *É possível colocar as configurações dessa máquina junto a uma das de frontend*.
 
 
 *******
@@ -42,7 +43,7 @@
     * Adicione a seguinte configuração:
     
      <br>
-
+    
      ```
      
      upstream servidores{
@@ -128,7 +129,7 @@
      ```
 
     * Adicione a seguinte configuração, apontando para o Load Balancer:
-    
+   - *Atenção ao configurar o seu apache2, configure ele com um arquivo HTML que irá bater em seu endpoint do backend*
      <br>
 
      ```
@@ -234,6 +235,25 @@
    sudo cp /root/client1.ovpn ~
 
    ```
+   *  Antes do próximo passo, confirme se todas as variveis estão presentes
+  
+   <br>
+
+    ```
+    client
+    dev tun
+    proto udp
+    remote <ip-VM-ProxyReverso> 1194
+    resolv-retry infinite
+    nobind
+    persist-key
+    persist-tun
+    remote-cert-tls server
+    auth SHA512
+    ignore-unknown-option block-outside-dns
+    verb 3
+    cipher AES-256-GCM
+    ```
 
    * Baixe o arquivo ``.ovpn`` para a máquina local:
 
@@ -245,13 +265,13 @@
 
    ```
 
-2. **Configuração do Cliente no Windows**
+1. **Configuração do Cliente no Windows**
    * Baixe o cliente OpenVPN: [OpenVPN Connect](https://openvpn.net/client/client-connect-vpn-for-windows/);
    * Abra o cliente OpenVPN e selecione o arquivo de configuração ``.ovpn`` para conectar-se ao servidor.
 
    <br>
 
-3. **Configuração do NGINX para Trabalhar com a VPN**
+2. **Configuração do NGINX para Trabalhar com a VPN**
    * Edite o arquivo de configuração do NGINX:
 
    <br>
